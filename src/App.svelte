@@ -43,6 +43,14 @@
     interval = undefined;
   }
 
+  function onToggle() {
+    if (active) {
+      onMouseLeave();
+    } else {
+      onMouseEnter();
+    }
+  }
+
   function onReset() {
     current = 0;
     saved = 0;
@@ -69,13 +77,12 @@
     >
       {active ? "⏳" : "⌛"}
     </span>
-    <span
-      class="block md:hidden text-[10rem] mb-4 active:scale-105 active:rotate-180 transition-all select-none"
-      on:pointerdown={onMouseEnter}
-      on:pointerup={onMouseLeave}
+    <button
+      class={`block md:hidden text-[10rem] mb-4 ${active ? "rotate-180" : "rotate-0"} transition-all select-none outline-none shadow-none`}
+      on:click={onToggle}
     >
       {active ? "⏳" : "⌛"}
-    </span>
+    </button>
     <button 
       class={"mt-4 font-mono px-6 py-2 w-36 min-h-[3rem] transition-all flex items-center justify-center rounded-md " + timer}
       on:click={onReset}  
