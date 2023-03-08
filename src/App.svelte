@@ -17,7 +17,6 @@
   $: timer = ` ${color.text} ${color.bg}`;
   $: active = interval !== undefined;
   $: time = saved + current;
-  $: formatted = format(time);
 
   function onMouseEnter() {
     color = {
@@ -86,10 +85,10 @@
       {active ? "⏳" : "⌛"}
     </button>
     <button 
-      class={"mt-4 font-mono text-xl px-6 py-2 min-w-[9rem] min-h-[3rem] transition-all flex items-center justify-center rounded-md " + timer}
+      class={"mt-4 font-mono text-2xl md:text-xl px-6 py-2 min-w-[9rem] min-h-[3rem] transition-all flex items-center justify-center rounded-md " + timer}
       on:click={onReset}  
     >
-      {formatted}
+      {format(time)}
     </button>
   </div>
 </main>
