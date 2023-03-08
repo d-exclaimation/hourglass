@@ -2,6 +2,7 @@
   import type { Palette } from "@d-exclaimation/common/tailwind";
   import { onDestroy } from "svelte";
   import { optional, state } from "./state";
+  import { format } from "./time";
 
   let interval = optional<number>();
   let start = state(new Date());
@@ -16,6 +17,7 @@
   $: timer = ` ${color.text} ${color.bg}`;
   $: active = interval !== undefined;
   $: time = saved + current;
+  $: formatted = format(time);
 
   function onMouseEnter() {
     color = {
@@ -71,23 +73,23 @@
     class="flex flex-col items-center justify-center"
   >
     <span
-      class="hidden md:block text-[10rem] mb-4 hover:scale-105 hover:rotate-180 transition-all"
+      class="hidden md:block text-[16rem] mb-4 hover:scale-105 hover:rotate-180 transition-all"
       on:mouseenter={onMouseEnter}
       on:mouseleave={onMouseLeave}
     >
       {active ? "⏳" : "⌛"}
     </span>
     <button
-      class={`block md:hidden text-[10rem] mb-4 ${active ? "rotate-180" : "rotate-0"} transition-all select-none outline-none shadow-none`}
+      class={`block md:hidden text-[16rem] mb-4 ${active ? "rotate-180" : "rotate-0"} transition-all select-none outline-none shadow-none`}
       on:click={onToggle}
     >
       {active ? "⏳" : "⌛"}
     </button>
     <button 
-      class={"mt-4 font-mono px-6 py-2 w-36 min-h-[3rem] transition-all flex items-center justify-center rounded-md " + timer}
+      class={"mt-4 font-mono text-xl px-6 py-2 min-w-[9rem] min-h-[3rem] transition-all flex items-center justify-center rounded-md " + timer}
       on:click={onReset}  
     >
-      {time.toFixed(2)}
+      {formatted}
     </button>
   </div>
 </main>
