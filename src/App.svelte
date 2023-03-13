@@ -18,7 +18,7 @@
   $: active = interval !== undefined;
   $: time = saved + current;
 
-  function onMouseEnter() {
+  function onContinue() {
     color = {
       text: "text-green-700",
       bg: "bg-green-50"
@@ -31,7 +31,7 @@
     }, 100);
   }
 
-  function onMouseLeave() {
+  function onPause() {
     color = {
       text: "text-red-700",
       bg: "bg-red-50"
@@ -46,9 +46,9 @@
 
   function onToggle() {
     if (active) {
-      onMouseLeave();
+      onPause();
     } else {
-      onMouseEnter();
+      onContinue();
     }
   }
 
@@ -71,15 +71,8 @@
   <div
     class="flex flex-col items-center justify-center"
   >
-    <span
-      class="hidden md:block text-[16rem] mb-4 hover:scale-105 hover:rotate-180 transition-all"
-      on:mouseenter={onMouseEnter}
-      on:mouseleave={onMouseLeave}
-    >
-      {active ? "⏳" : "⌛"}
-    </span>
     <button
-      class={`block md:hidden text-[16rem] mb-4 ${active ? "rotate-180" : "rotate-0"} transition-all select-none outline-none shadow-none`}
+      class={`text-[16rem] mb-4 ${active ? "rotate-180" : "rotate-0"} transition-all select-none outline-none shadow-none`}
       on:click={onToggle}
     >
       {active ? "⏳" : "⌛"}
